@@ -157,12 +157,22 @@ clean_df.to_csv("weather_clean.csv", index=False)
 # Close the browser
 driver.quit()
 
-# Save data to SQLite database
-with sqlite3.connect("weather.db") as conn:
-    weather_df.to_sql("weather_raw", conn, if_exists="replace", index=False)
-    clean_df.to_sql("weather_clean", conn, if_exists="replace", index=False)
 
-print("Data saved to SQLite database")
+# Save data to SQLite database
+# Read the CSV files
+raw_df = pd.read_csv("weather_raw.csv")
+clean_csv_df = pd.read_csv("weather_clean.csv")
+
+# Connect to SQLite database
+with sqlite3.connect("weather.db") as conn:
+    # Import raw CSV into its own table
+    raw_df.to_sql("weather_raw", conn, if_exists="replace", index=False)
+
+    # Import clean CSV into its own table
+    clean_csv_df.to_sql("weather_clean", conn, if_exists="replace", index=False)
+
+print("\nCSV files imported into SQLite database.")
+print("weather_raw and weather_clean tables are created")
 
 
 
