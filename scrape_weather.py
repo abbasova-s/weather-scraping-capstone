@@ -1,5 +1,6 @@
 # Initialization
 import pandas as pd
+import sqlite3
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -156,7 +157,12 @@ clean_df.to_csv("weather_clean.csv", index=False)
 # Close the browser
 driver.quit()
 
+# Save data to SQLite database
+with sqlite3.connect("weather.db") as conn:
+    weather_df.to_sql("weather_raw", conn, if_exists="replace", index=False)
+    clean_df.to_sql("weather_clean", conn, if_exists="replace", index=False)
 
+print("Data saved to SQLite database")
 
 
 
