@@ -9,5 +9,6 @@ Streamlit dashboard includes:
 3. Number of cities by weather condition
 
 The deployed dashboard is available here:
+https://weather-scraping-capstone.streamlit.app/
 
-![Weather Around the World Dashboard](dashboard_screenshot.png)
+![Weather Around the World Dashboard](dashboard_screenshot.jpg)
